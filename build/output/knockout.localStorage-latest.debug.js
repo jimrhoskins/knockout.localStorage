@@ -1,0 +1,37 @@
+// Knockout localStorage plugin v0.0.1
+// (c) 2011 Jim Hoskins - https://github.com/jimrhoskins/knockout.localStorage
+// License: MIT (http://opensource.org/licenses/mit-license)
+
+(function(ko){
+  // Wrap ko.observable and ko.observableArray
+  var methods = ['observable', 'observableArray'];
+
+  ko.utils.arrayForEach(methods, function(method){
+    var saved = ko[method];
+    
+    ko[method] = function(initialValue, options){
+      options = options || {};
+
+      var key = options.persist;
+
+      // Load existing value if set
+      if(key && localStorage.hasOwnProperty(key)){
+        try{
+          initialValue = JSON.parse(localStorage.getItem(key))
+        }catch(e){};
+      }
+
+      // Create observable from saved method
+      var observable = saved(initialValue);
+
+      // Subscribe to changes, and save to localStorage
+      if(key){
+        observable.subscribe(function(newValue){
+          localStorage.setItem(key, JSON.stringify(newValue));
+        });
+      };
+
+      return observable;
+    }
+  })
+})(ko);

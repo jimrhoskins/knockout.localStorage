@@ -1,0 +1,13 @@
+#!/bin/sh
+
+SourceFiles=../knockout.localStorage.js
+OutFile=output/knockout.localStorage-latest.js
+OutFileDebug=output/knockout.localStorage-latest.debug.js
+
+cat version-header.js $SourceFiles > $OutFileDebug # Concatenate all the files
+
+# Now call Google Closure Compiler to produce a minified version
+
+cp version-header.js $OutFile
+curl -d output_info=compiled_code -d output_format=text -d compilation_level=SIMPLE_OPTIMIZATIONS --data-urlencode js_code@$OutFileDebug "http://closure-compiler.appspot.com/compile" >> $OutFile
+

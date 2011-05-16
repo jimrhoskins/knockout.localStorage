@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title> knockout.localStorage.js Examples</title>
+    <script src="../support/knockout-latest.js"></script>
+    <script src="../knockout.localStorage.js"></script>
+  </head>
+  <body>
+    <p>
+      <label for="default">Default - ko.observable()</label><br>
+      <input id="default" data-bind="value: name"></input>
+      <output data-bind="value: name()" ></output>
+    </p>
+    <p>
+      <label for="initial">Initial Value - ko.observable('Jim')</label><br>
+      <input id="initial" data-bind="value: nameInitial"></input>
+      <output data-bind="value: nameInitial()" ></output>
+    </p>
+    <p>
+      <label for="persist">localStorage - ko.observable(null, {persist: 'namePersist'})</label><br>
+      <input id="persist" data-bind="value: namePersist"></input>
+      <output data-bind="value: namePersist()" ></output>
+    </p>
+    <p>
+      <label for="persistInitial">localStorage w/ Initial Value - ko.observable('James', {persist: 'nameInitialPersist'})</label><br>
+      <input id="default" data-bind="value: nameInitialPersist"></input>
+      <output data-bind="value: nameInitialPersist()" ></output>
+    </p>
+      
+    <script>
+      var viewModel = {
+        // Default Observable (no initial value, no localStorage)
+        name: ko.observable(),
+
+        // Observable with initital value (no localStorage) 
+        nameInitial: ko.observable('Jim'),
+
+        // Observable with localStorage Persistence 
+        namePersist: ko.observable(null, {persist: 'namePersist'}),
+
+        // Observable with initial value and localStorage Persistence
+        nameInitialPersist: ko.observable('James', {persist: 'nameDefaultPersis'})
+
+      }
+
+      ko.applyBindings(viewModel);
+
+    </script>
+  </body>
+</html>
