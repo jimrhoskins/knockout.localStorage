@@ -23,7 +23,7 @@
       // Subscribe to changes, and save to localStorage
       if(key){
         observable.subscribe(function(newValue){
-          localStorage.setItem(key, JSON.stringify(newValue));
+          localStorage.setItem(key, ko.toJSON(newValue));
         });
       };
 
