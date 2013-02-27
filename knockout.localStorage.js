@@ -36,7 +36,7 @@
 
         // Be notify of the changes at the localStorage
         if (options.synclocal) {
-          (function (saved, key) {
+          (function (observable, key) {
             setInterval(function () {
               try{
                 var localVal = JSON.parse(localStorage.getItem(key))
@@ -48,7 +48,7 @@
                 console.warn(e);
               };
             }, options.pollfreq || DEFAULT_POLL_FREQUENCY);
-          })(saved, key);
+          })(observable, key);
         }
 
       };

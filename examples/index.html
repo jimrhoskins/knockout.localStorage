@@ -49,7 +49,7 @@
         nameInitialPersist: ko.observable('James', {persist: 'nameDefaultPersis'}),
 
         // With local sync
-        synclocal : ko.observable('FAIL: Should not see this', {persist: 'nameTestLocal', synclocal : true })
+        synclocal : ko.observable('FAIL: No localStorage changes seen', {persist: 'nameTestLocal', synclocal : true })
       }
 
       ko.applyBindings(viewModel);
