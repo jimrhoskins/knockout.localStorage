@@ -26,8 +26,15 @@
       <input id="default" data-bind="value: nameInitialPersist"></input>
       <output data-bind="value: nameInitialPersist()" ></output>
     </p>
+    
+    <p>
+      <span data-bind="text: synclocal"></span>
+    </p>
+
       
     <script>
+      localStorage.clear();
+
       var viewModel = {
         // Default Observable (no initial value, no localStorage)
         name: ko.observable(),
@@ -39,11 +46,21 @@
         namePersist: ko.observable(null, {persist: 'namePersist'}),
 
         // Observable with initial value and localStorage Persistence
-        nameInitialPersist: ko.observable('James', {persist: 'nameDefaultPersis'})
+        nameInitialPersist: ko.observable('James', {persist: 'nameDefaultPersis'}),
 
+        // With local sync
+        synclocal : ko.observable('FAIL: Should not see this', {persist: 'nameTestLocal', synclocal : true })
       }
 
       ko.applyBindings(viewModel);
+
+
+      // TODO: move to proper test suite
+      var i=0;
+      setInterval(function () {
+          localStorage.setItem('nameTestLocal', '"PASS: change was made '+i+' times"');
+          i+=1;
+      },500);
 
     </script>
   </body>
