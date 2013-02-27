@@ -18,7 +18,9 @@ the key to use when storing the value to localHost
       namePersist: ko.observable(null, {persist: 'namePersist'}),
 
       nameDefaultPersist: ko.observable('James', {persist: 'nameDefaultPersis'})
-
+    
+      // any changes to localStorage will be propagated back to the variable
+      synclocal : ko.observable('Jamie', {persist: 'nameTestLocal', synclocal : true, pollfreq : 500 })
     }
 
     ko.applyBindings(viewModel);
