@@ -17,7 +17,7 @@ the key to use when storing the value to localHost
 
       namePersist: ko.observable(null, {persist: 'namePersist'}),
 
-      nameDefaultPersist: ko.observable('James', {persist: 'nameDefaultPersis'})
+      nameDefaultPersist: ko.observable('James', {persist: 'nameDefaultPersist'})
 
     }
 
